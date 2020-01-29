@@ -46,6 +46,7 @@
         />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/loginbutton"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_below="@+id/password"
@@ -53,7 +54,7 @@
         app:cardBackgroundColor="@color/colorAccent"
         app:cardCornerRadius="25dp"
         app:cardElevation="10dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="20dp"
         >
 
         <RelativeLayout
@@ -73,5 +74,17 @@
                 />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/backtosignuplogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loginbutton"
+        android:layout_alignStart="@+id/username"
+        android:layout_alignLeft="@+id/username"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="65dp"
+        android:text="Sign up/Login"
+        android:clickable="true" />
 
 </RelativeLayout>
