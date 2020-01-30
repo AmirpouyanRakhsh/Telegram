@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -30,7 +32,7 @@ public class signup extends AppCompatActivity {
     EditText fullname;
     EditText username;
     EditText password;
-    Button signupbtn;
+    CardView cardView;
 
 
     TextView textView;
@@ -48,8 +50,20 @@ public class signup extends AppCompatActivity {
              }
          });
 
+        cardView = (CardView)findViewById(R.id.signupbutton);
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotochatlist();
+            }
+        });
+
     }
 
+    public void gotochatlist(){
+        Intent intent=new Intent(signup.this,chatlist.class);
+        startActivity(intent);
+    }
 
     public void returntopreviouspage(View view){
         Intent intent=new Intent(signup.this,MainActivity.class);
