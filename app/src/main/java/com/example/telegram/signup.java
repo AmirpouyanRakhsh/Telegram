@@ -27,37 +27,53 @@ import java.io.ObjectOutputStream;
 import java.lang.ref.WeakReference;
 import java.net.Socket;
 
-public class signup extends AppCompatActivity {
-    Socket socket;
+public class signup extends AppCompatActivity implements View.OnClickListener{
+
     EditText fullname;
     EditText username;
     EditText password;
+    EditText bio;
+
+
     CardView cardView;
-
-
     TextView textView;
+
+    public static Object input;
+    public static Object output;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        new MyTaskRegister().execute();
+
+        username = (EditText)findViewById(R.id.username);
+        password = (EditText)findViewById(R.id.password);
+        fullname = (EditText)findViewById(R.id.fullname);
+        bio = (EditText)findViewById(R.id.bio);
+
         textView = findViewById(R.id.backtosignuplogin);
-        textView.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 returntopreviouspage(textView);
-             }
-         });
+        textView.setOnClickListener(this);
 
-        cardView = (CardView)findViewById(R.id.signupbutton);
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gotochatlist();
-            }
-        });
+        cardView = (CardView) findViewById(R.id.signupbutton);
+        cardView.setOnClickListener(this);
 
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.signupbutton:
+                if (infoCheck())
+                    gotochatlist();
+                break;
+            case R.id.backtosignuplogin:
+                returntopreviouspage();
+                break;
+        }
     }
 
     public void gotochatlist(){
@@ -65,74 +81,95 @@ public class signup extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void returntopreviouspage(View view){
+    public void returntopreviouspage(){
         Intent intent=new Intent(signup.this,MainActivity.class);
         startActivity(intent);
     }
 
+    public Boolean infoCheck() {
+        if (password.getText().toString().length() == 0 && username.getText().toString().length() == 0 && fullname.getText().toString().length() == 0) {
+            password.setError("Password field can't be empty!");
+            username.setError("Username field can't be empty!");
+            fullname.setError("fullname field can't be empty!");
+            return false;
+        }
+        if (username.getText().toString().length() == 0) {
+            username.setError("Username field can't be empty!");
+            return false;
+        }
 
-}
-class signup_check extends AsyncTask<String,Void,String>{
+        if (password.getText().toString().length() == 0) {
+            password.setError("Password field can't be empty!");
+            return false;
+        }
 
-
-    Socket socket;
-    ObjectOutputStream out;
-    ObjectInputStream in;
-    boolean result;
-    WeakReference<signup> activityRefrence;
-    User user;
-
-    signup_check(signup context){
-        activityRefrence = new WeakReference<>(context);
+        if (fullname.getText().toString().length() == 0) {
+            fullname.setError("fullname field can't be empty!");
+            return false;
+        }
+        if (password.getText().toString().length() != 0 && password.getText().toString().length() < 6) {
+            password.setError("Password must be longer than 5 characters");
+            return false;
+        } else {
+            username.setError(null);
+            password.setError(null);
+            fullname.setError(null);
+        }
+        return true;
     }
 
-    @Override
-    protected String doInBackground(String... strings) {
-        try {
-            socket = new Socket();
-            out = new ObjectOutputStream(socket.getOutputStream());
-            in= new ObjectInputStream(socket.getInputStream());
-            out.writeObject(strings);
-            out.flush();
-            result=in.readBoolean();
+}
 
-            if (result){
-                user = (User) in.readObject();
-                System.out.println(user.username);
-            }
-            out.close();
-            in.close();
-            socket.close();
+class MyTaskRegister extends AsyncTask<String, Void, Void> {
+    private Socket socket;
+    private ObjectOutputStream output;
+    private ObjectInputStream input;
+
+    @Override
+    protected Void doInBackground(String... strings) {
+        try {
+
+            socket = new Socket("192.168.0.12", 8888);
+            output = new ObjectOutputStream(socket.getOutputStream());
+            input = new ObjectInputStream(socket.getInputStream());
+
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
+        new Thread(new Runnable() { // for sending information
+            @Override
+            public void run() {
+                while (true) {
+                    if (signup.output != null) {
+                        try {
+                            output.writeObject(signup.output);
+                            output.flush();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        signup.output = null;
+                    }
+                }
+            }
+        }).start();
+        new Thread(new Runnable() { // for receiving information
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        signup.input = input.readObject();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+
         return null;
     }
-
-    @Override
-    protected void onPostExecute(String s) {
-        signup activity = activityRefrence.get();
-        if (activity == null || activity.isFinishing()){
-            return;
-        }
-
-        if (activityRefrence.get().username.getText().toString().trim().length() == 0 || activityRefrence.get().password.getText().toString().trim().length() == 0) {
-            Toast.makeText(activity , "all fields should be filled" , Toast.LENGTH_LONG).show();
-        }
-        else if (activityRefrence.get().password.getText().toString().trim().length() < 5){
-            Toast.makeText(activity , "password is too short!" , Toast.LENGTH_LONG).show();
-        }
-        else if (result){
-            Toast.makeText(activity, "You're Logged in Successfully", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(activity.getApplicationContext(), MainActivity.class);
-            intent.putExtra("user" , user);
-            activity.startActivity(intent);
-        }else{
-            Toast.makeText(activity, "Wrong Username Or Password !", Toast.LENGTH_LONG).show();
-        }
-
-    }
 }
+
+
 
