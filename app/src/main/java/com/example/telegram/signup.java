@@ -97,7 +97,7 @@ class signup_check extends AsyncTask<String,Void,String>{
         }
         else if (result){
             Toast.makeText(activity, "You're Logged in Successfully", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(activity.getApplicationContext(), main_page.class);
+            Intent intent = new Intent(activity.getApplicationContext(), MainActivity.class);
             intent.putExtra("user" , user);
             activity.startActivity(intent);
         }else{
