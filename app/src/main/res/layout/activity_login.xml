@@ -84,7 +84,7 @@
         android:layout_alignLeft="@+id/username"
         android:layout_marginTop="20dp"
         android:layout_marginStart="65dp"
-        android:text="Sign up/Login"
+        android:text="Back to Sign up/Login"
         android:clickable="true" />
 
 </RelativeLayout>
