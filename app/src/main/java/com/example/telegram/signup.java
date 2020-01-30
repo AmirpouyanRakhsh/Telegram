@@ -40,13 +40,6 @@ public class signup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        signupbtn = findViewById(R.id.signupbutton);
-        signupbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gotochatlist();
-            }
-        });
         textView = findViewById(R.id.backtosignuplogin);
         textView.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -56,10 +49,7 @@ public class signup extends AppCompatActivity {
          });
 
     }
-    public void gotochatlist(){
-        Intent intent = new Intent(signup.this,chatlist.class);
-        startActivity(intent);
-    }
+
 
     public void returntopreviouspage(View view){
         Intent intent=new Intent(signup.this,MainActivity.class);

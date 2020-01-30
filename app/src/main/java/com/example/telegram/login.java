@@ -1,6 +1,7 @@
 package com.example.telegram;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 public class login extends AppCompatActivity {
     TextView textView;
+    CardView cardView;
 
     Activity activity;
     EditText username;
@@ -22,10 +24,11 @@ public class login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginbtn = findViewById(R.id.loginbutton);
-        loginbtn.setOnClickListener(new View.OnClickListener() {
+
+        cardView=(CardView)findViewById(R.id.loginbutton);
+        cardView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 gotochatlist();
             }
         });
@@ -39,11 +42,11 @@ public class login extends AppCompatActivity {
         });
     }
 
+
     public void gotochatlist(){
-        Intent intent = new Intent(login.this,chatlist.class);
+        Intent intent=new Intent(login.this,chatlist.class);
         startActivity(intent);
     }
-
     public void returntopreviouspage(View view){
         Intent intent=new Intent(login.this,MainActivity.class);
         startActivity(intent);
