@@ -75,14 +75,53 @@
                     android:textColorHint="@color/colorAccent">
 
                     <EditText
+                        android:id="@+id/bio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Bio"
                         android:inputType="text"
                         android:textSize="50sp"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/signupbutton"
+                        android:layout_width="300dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_horizontal"
+                        app:cardBackgroundColor="@color/colorAccent"
+                        app:cardCornerRadius="25dp"
+                        app:cardElevation="10dp"
+                        android:layout_marginTop="20dp"
+                        >
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp">
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginBottom="11dp"
+                                android:text="Sign Up"
+                                android:textColor="#fff" />
+                    </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/backtosignuplogin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Back to Sign Up / Login"
+                        android:textColor="#fff"
+                        android:layout_marginTop="40dp"
+                        android:clickable="true"/>
+
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.textfield.TextInputLayout>
         </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.textfield.TextInputLayout>
+
 
 </LinearLayout>

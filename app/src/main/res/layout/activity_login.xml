@@ -65,10 +65,9 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:text="Login"
                 android:textColor="#fff"
-                android:layout_centerInParent="true"
-
 
 
                 />
@@ -80,11 +79,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/loginbutton"
-        android:layout_alignStart="@+id/username"
-        android:layout_alignLeft="@+id/username"
+       android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="65dp"
-        android:text="Back to Sign up/Login"
+        android:textColor="#fff"
+        android:text="Back to Sign Up / Login"
         android:clickable="true" />
 
 </RelativeLayout>

@@ -22,6 +22,13 @@ public class login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        loginbtn = findViewById(R.id.loginbutton);
+        loginbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotochatlist();
+            }
+        });
 
         textView = findViewById(R.id.backtosignuplogin);
         textView.setOnClickListener(new View.OnClickListener() {
@@ -30,6 +37,11 @@ public class login extends AppCompatActivity {
                 returntopreviouspage(textView);
             }
         });
+    }
+
+    public void gotochatlist(){
+        Intent intent = new Intent(login.this,chatlist.class);
+        startActivity(intent);
     }
 
     public void returntopreviouspage(View view){

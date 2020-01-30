@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.DataInputStream;
@@ -32,13 +33,37 @@ public class signup extends AppCompatActivity {
     Button signupbtn;
 
 
+    TextView textView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        signupbtn = findViewById(R.id.signupbutton);
+        signupbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotochatlist();
+            }
+        });
+        textView = findViewById(R.id.backtosignuplogin);
+        textView.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 returntopreviouspage(textView);
+             }
+         });
 
+    }
+    public void gotochatlist(){
+        Intent intent = new Intent(signup.this,chatlist.class);
+        startActivity(intent);
+    }
 
+    public void returntopreviouspage(View view){
+        Intent intent=new Intent(signup.this,MainActivity.class);
+        startActivity(intent);
     }
 
 
