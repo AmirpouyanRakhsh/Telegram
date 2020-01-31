@@ -11,7 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".chatlist"></activity>
+        <activity android:name=".about"></activity>
+        <activity android:name=".settings" />
+        <activity android:name=".channel" />
+        <activity android:name=".group" />
+        <activity android:name=".chatroom" />
+        <activity android:name=".profile" />
+        <activity android:name=".chatlist" />
         <activity android:name=".login" />
         <activity android:name=".signup" />
         <activity android:name=".MainActivity">

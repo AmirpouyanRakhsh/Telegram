@@ -39,5 +39,9 @@
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/drawer_menu" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 
 </androidx.drawerlayout.widget.DrawerLayout>
