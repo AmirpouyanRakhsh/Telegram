@@ -20,9 +20,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.ref.WeakReference;
 import java.net.Socket;
 
 public class login extends AppCompatActivity implements View.OnClickListener {
@@ -68,6 +70,8 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 break;
         }
     }
+
+
 
         public void infoCheck() {
             if (password.getText().toString().length() == 0 && username.getText().toString().length() == 0) {
@@ -116,6 +120,11 @@ class MyTaskLogin extends AsyncTask<String, Void, Void> {
     private Socket socket;
     private ObjectOutputStream output;
     private ObjectInputStream input;
+    DataInputStream din;
+    boolean result;
+    WeakReference<login> activityRefrence;
+    User user;
+
 
     @Override
     protected Void doInBackground(String... strings) {
@@ -161,5 +170,4 @@ class MyTaskLogin extends AsyncTask<String, Void, Void> {
 
         return null;
     }
-
 }
