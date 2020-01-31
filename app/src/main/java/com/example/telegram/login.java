@@ -56,15 +56,6 @@ public class login extends AppCompatActivity implements View.OnClickListener {
 
 
 
-    public void gotochatlist(){
-        Intent intent=new Intent(login.this,chatlist.class);
-        startActivity(intent);
-    }
-    public void returntopreviouspage(View view){
-        Intent intent=new Intent(login.this,MainActivity.class);
-        startActivity(intent);
-    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -130,7 +121,7 @@ class MyTaskLogin extends AsyncTask<String, Void, Void> {
     protected Void doInBackground(String... strings) {
         try {
 
-            socket = new Socket("192.168.0.12", 8888);
+            socket = new Socket("172.20.176.95", 6666);
             output = new ObjectOutputStream(socket.getOutputStream());
             input = new ObjectInputStream(socket.getInputStream());
 

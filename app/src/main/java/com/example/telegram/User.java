@@ -1,6 +1,9 @@
 package com.example.telegram;
-
+import androidx.annotation.Nullable;
+import java.util.ArrayList;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class User implements Serializable {
 
@@ -18,5 +21,11 @@ public class User implements Serializable {
     public String getUsername() {
         return username;
     }
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        return this.username.equals(((User)obj).username);
+    }
+
+    static Set<User> users = new HashSet<>();
 
 }

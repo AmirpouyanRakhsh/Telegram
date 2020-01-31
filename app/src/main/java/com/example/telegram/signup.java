@@ -129,7 +129,7 @@ class MyTaskRegister extends AsyncTask<String, Void, Void> {
     protected Void doInBackground(String... strings) {
         try {
 
-            socket = new Socket("192.168.0.12", 8888);
+            socket = new Socket("172.20.176.95", 6666);
             output = new ObjectOutputStream(socket.getOutputStream());
             input = new ObjectInputStream(socket.getInputStream());
 
